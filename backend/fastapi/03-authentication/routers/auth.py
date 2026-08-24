@@ -61,4 +61,25 @@ def login_user(user:UserLogin,db:Session=Depends(get_db)):
         "access_token": access_token,
         "token_type": "bearer"
     }
-    
+
+@router.get("/users/{user_id}", response_model=UserResponse)
+def get_user(
+    user_id: int,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    if current_user.id != user_id:
+        raise HTTPException(
+            status_code=403,
+            detail="You are not allowed to access this user"
+        )
+
+    user_data = db.query(User).filter(User.id == user_id).first()
+
+    if not user_data:
+        raise HTTPException(
+            status_code=404,
+            detail="User Not Found"
+        )
+
+    return user_data
