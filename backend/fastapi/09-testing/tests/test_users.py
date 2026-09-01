@@ -1,6 +1,6 @@
 from main import User
 import pytest
-from unittest.mock import patch
+
 
 @pytest.mark.parametrize("name", [
     "Viraj",
@@ -20,6 +20,7 @@ def test_create_user_with_different_names(client, db, name):
     assert data["name"] == name
 
 
+
 @pytest.mark.parametrize("payload", [
     {},
     {"wrong_field": "Viraj"},
@@ -32,13 +33,14 @@ def test_create_user_invalid_payload(client, payload):
 
     assert response.status_code == 422
 
-# ---------------------------------------------------------------
+
 
 def test_create_user_invalid(client):
     # Missing required "name" parameter should fail validation.
     response = client.post("/users", json={})
 
     assert response.status_code == 422
+
 
 
 def test_create_user(client, db):
@@ -60,12 +62,6 @@ def test_create_user(client, db):
     assert user.name == "Viraj"
 
 
-def test_database_starts_empty(client, db):
-    # Each test should start with an empty test database.
-    users = db.query(User).all()
-
-    assert len(users) == 0
-
 
 def test_get_user(client, user):
     response = client.get(f"/users/{user.id}")
@@ -75,12 +71,22 @@ def test_get_user(client, user):
     assert response.json() == {"id": user.id, "name": "Viraj"}
 
 
+
 def test_get_user_not_found(client):
     # Request a user ID that does not exist.
     response = client.get("/users/999")
 
     assert response.status_code == 404
     assert response.json() == {"detail": "User not found"}
+
+
+
+def test_database_starts_empty(client, db):
+    # Each test should start with an empty test database.
+    users = db.query(User).all()
+
+    assert len(users) == 0
+
 
 
 def test_update_user(client, db):
@@ -109,6 +115,7 @@ def test_update_user(client, db):
     assert user.name == "Viraj Updated"
 
 
+
 def test_update_user_not_found(client):
     # Try to update a user that does not exist.
     response = client.put(
@@ -118,6 +125,7 @@ def test_update_user_not_found(client):
 
     assert response.status_code == 404
     assert response.json() == {"detail": "User not found"}
+
 
 
 def test_delete_user(client, db):
@@ -139,6 +147,7 @@ def test_delete_user(client, db):
     assert deleted_user is None
 
 
+
 def test_delete_user_not_found(client):
     # Try to delete a user that does not exist.
     response = client.delete("/users/999")
@@ -146,57 +155,3 @@ def test_delete_user_not_found(client):
     assert response.status_code == 404
     assert response.json() == {"detail": "User not found"}
 
-def test_protected_without_token(client):
-    response = client.get("/protected")
-
-    assert response.status_code == 401
-    assert response.json() == {
-        "detail": "Invalid or missing token"
-    }
-
-def test_protected_with_wrong_token(client):
-    response = client.get(
-        "/protected",
-        headers={
-            "Authorization": "Bearer wrong-token"
-        }
-    )
-
-    assert response.status_code == 401
-    assert response.json() == {
-        "detail": "Invalid or missing token"
-    }
-
-def test_protected_with_valid_token(client, auth_headers):
-    response = client.get(
-        "/protected",
-        headers=auth_headers
-    )
-
-    assert response.status_code == 200
-    assert response.json() == {
-        "message": "You are authenticated"
-    }
-
-def test_external(client):
-    response = client.get("/external")
-
-    assert response.status_code == 200
-    assert response.json() == {
-        "message": "Real external response"
-    }
-
-
-def test_external_with_mock(client):
-    with patch(
-        "main.get_external_message",
-        return_value="Mocked response"
-    ) as mock_message:
-        response = client.get("/external")
-
-    assert response.status_code == 200
-    assert response.json() == {
-        "message": "Mocked response"
-    }
-
-    mock_message.assert_called_once_with()

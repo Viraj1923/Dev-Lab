@@ -1,3 +1,3 @@
-def get_external_message():
-    # Pretend this function calls a third-party service.
-    return "Real external response"
+def get_external_message(name,language):
+    # Pretend this function sends the name to a third-party service.
+    return f"Real response for {name} {language}"

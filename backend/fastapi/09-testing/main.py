@@ -119,9 +119,26 @@ def protected_route(
     }
 
 @app.get("/external")
-def external():
-    message = get_external_message()
+def external(name: str, language: str):
+    first_message = get_external_message(name, language)
+    second_message = get_external_message(name, language)
 
     return {
-        "message": message
+        "first": first_message,
+        "second": second_message
     }
+
+@app.get("/external-failure")
+def external_failure(name: str, language: str):
+    try:
+        message = get_external_message(name, language)
+
+        return {
+            "message": message
+        }
+
+    except Exception:
+        raise HTTPException(
+            status_code=503,
+            detail="External service unavailable"
+        )
