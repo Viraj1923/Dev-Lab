@@ -1,0 +1,13 @@
+# Local virtual environment
+.venv/
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# Git files
+.git/
+.gitignore
+
+# Environment/secrets
+.env
