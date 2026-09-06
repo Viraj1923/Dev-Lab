@@ -273,14 +273,6 @@ POSTGRES_USER=<your-postgres-username>
 POSTGRES_PASSWORD=<your-postgres-password>
 POSTGRES_DB=<your-database-name>
 
-
-### 🔥 Important
-
-Also, since you already pushed the README containing the real values, **the old commit still contains those secrets in Git history** if the repository is public.
-
-At minimum, **change/rotate the exposed secret** (`secret_key`) and any real database password if those are actually production credentials. If they're only dummy local-development credentials, the immediate risk is much lower.
-
-For the README itself, though, the section above is the correct version: **show the variable structure, not the actual credentials.**
 ```
 
 ⚠️ **Never commit real secrets or production database credentials to GitHub.**
