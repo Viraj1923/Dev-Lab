@@ -2,6 +2,9 @@ from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
 
 from app.routers.auth import router as auth_router
+from app.routers.projects import router as project_router
+from app.routers.tasks import router as task_router
+
 from app.core.exceptions import (
     EmailAlreadyRegisteredError,
     InvalidCredentialsError,
@@ -33,3 +36,5 @@ async def invalid_credentials_handler(
 
 
 app.include_router(auth_router)
+app.include_router(project_router)
+app.include_router(task_router)

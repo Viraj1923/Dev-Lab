@@ -5,9 +5,9 @@ class Settings(BaseSettings):
     app_name: str
     database_url: str
     secret_key: str
-    ALGORITHM:str
-    ACCESS_TOKEN_EXPIRE_MINUTES:str
-
+    algorithm: str = "HS256"
+    access_token_expire_minutes: int = 30
+    database_echo: bool = False
 
     model_config = SettingsConfigDict(
         env_file=".env",
