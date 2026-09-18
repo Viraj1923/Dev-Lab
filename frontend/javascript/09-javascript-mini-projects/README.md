@@ -1,23 +1,48 @@
 # JavaScript Mini Projects
 
-Small projects built using JavaScript to practice DOM manipulation,
-events, Fetch API, and async/await.
+Small projects combining the JavaScript concepts learned throughout Phase 1.
 
 ## Projects
 
-1. Todo List
-   - DOM manipulation
-   - Events
-   - Dynamic elements
-   - Delete and complete tasks
+### 1. Todo List
 
-2. Character Counter
-   - Input events
-   - String length
-   - DOM updates
+Practiced:
 
-3. API User Search
-   - Fetch API
-   - Async/await
-   - Error handling
-   - DOM manipulation
+- DOM manipulation
+- Click events
+- Dynamic element creation
+- `classList.toggle()`
+- Removing elements
+- Input validation
+
+Features:
+
+- Add tasks
+- Mark tasks as completed
+- Delete tasks
+
+### 2. Character Counter
+
+Practiced:
+
+- Input events
+- Reading `.value`
+- String `.length`
+- Updating the DOM
+
+### 3. API User Search
+
+Practiced:
+
+- Fetch API
+- `async/await`
+- `response.ok`
+- Error handling
+- Dynamic DOM updates
+- Nested API data
+
+Features:
+
+- Search a user by ID
+- Display name, email, and city
+- Handle invalid API responses
