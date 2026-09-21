@@ -1,3 +1,8 @@
+import Header from "./Header";
+import Card from "./Card";
+import ProfileCard from "./ProfileCard";
+import Footer from "./Footer";
+
 const user = {
   name: "Viraj",
   role: "Frontend Developer",
@@ -7,24 +12,12 @@ const user = {
 
 function App() {
   return (
-    <div className="profileCard">
-      <h2>{user.name}</h2>
-      <p>{user.role}</p>
-
-      <h3>Skills</h3>
-      <ul>
-        {user.skills.map((skill) => (
-          <li key={skill}>{skill}</li>
-        ))}
-      </ul>
-
-      <p>
-        {user.isAvailable
-          ? "Available for work"
-          : "Currently unavailable"}
-      </p>
-
-      {user.isAvailable && <p>Open to opportunities</p>}
+    <div>
+      <Header title="User Profile" />
+      <Card>
+        <ProfileCard user={user} />
+      </Card>
+      <Footer />
     </div>
   );
 }
