@@ -1,23 +1,32 @@
-import Header from "./Header";
-import Card from "./Card";
-import ProfileCard from "./ProfileCard";
-import Footer from "./Footer";
-
-const user = {
-  name: "Viraj",
-  role: "Frontend Developer",
-  isAvailable: true,
-  skills: ["JavaScript", "React", "Node.js"]
-};
+import { useState } from "react";
+import TaskInput from "./TaskInput";
+import TaskList from "./TaskList";
 
 function App() {
+  const [tasks, setTasks] = useState([]);
+
+  function addTask(task) {
+    if (task.trim() === "") return;
+
+    setTasks((prevTasks) => [...prevTasks, task]);
+  }
+
+  function removeTask(indexToDelete) {
+    setTasks((prevTasks) =>
+      prevTasks.filter((_, index) => index !== indexToDelete)
+    );
+  }
+
   return (
     <div>
-      <Header title="User Profile" />
-      <Card>
-        <ProfileCard user={user} />
-      </Card>
-      <Footer />
+      <h2>Task Manager</h2>
+
+      <TaskInput onAddTask={addTask} />
+
+      <TaskList
+        tasks={tasks}
+        onRemoveTask={removeTask}
+      />
     </div>
   );
 }
