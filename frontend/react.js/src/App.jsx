@@ -1,32 +1,60 @@
 import { useState } from "react";
-import TaskInput from "./TaskInput";
-import TaskList from "./TaskList";
+
+const users = [
+  { id: 1, name: "Viraj", role: "Frontend Developer", active: true },
+  { id: 2, name: "Rahul", role: "Backend Developer", active: false },
+  { id: 3, name: "Amit", role: "Full Stack Developer", active: true },
+  { id: 4, name: "Sneha", role: "UI/UX Designer", active: true }
+];
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [search, setSearch] = useState("");
+  const [showActiveOnly, setShowActiveOnly] = useState(false);
 
-  function addTask(task) {
-    if (task.trim() === "") return;
+  const filteredUsers = users.filter((user) => {
+    const matchesSearch = user.name
+      .toLowerCase()
+      .includes(search.toLowerCase());
 
-    setTasks((prevTasks) => [...prevTasks, task]);
-  }
+    const matchesActive = showActiveOnly ? user.active : true;
 
-  function removeTask(indexToDelete) {
-    setTasks((prevTasks) =>
-      prevTasks.filter((_, index) => index !== indexToDelete)
-    );
-  }
+    return matchesSearch && matchesActive;
+  });
 
   return (
     <div>
-      <h2>Task Manager</h2>
+      <h2>User Directory</h2>
 
-      <TaskInput onAddTask={addTask} />
+      <div>
+        <input
+          type="text"
+          placeholder="Search by name..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
 
-      <TaskList
-        tasks={tasks}
-        onRemoveTask={removeTask}
-      />
+      <div>
+        <button onClick={() => setShowActiveOnly((prev) => !prev)}>
+          {showActiveOnly ? "Show All Users" : "Show Active Users Only"}
+        </button>
+      </div>
+
+      {filteredUsers.length === 0 ? (
+        <p>No users found.</p>
+      ) : (
+        <ul>
+          {filteredUsers.map((user) => (
+            <li key={user.id}>
+              <strong>{user.name}</strong>
+              <div>{user.role}</div>
+              <small>
+                Status: {user.active ? "Active" : "Inactive"}
+              </small>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
