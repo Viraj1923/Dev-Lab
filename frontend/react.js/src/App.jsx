@@ -1,7 +1,7 @@
-import Module05 from "./modules/05-Forms-Controlled-Components/Module05";
+import Module06 from "./modules/06-UseEffect-Component-Lifecycle/Module06";   
 
 function App() {
-  return <Module05 />;
+  return <Module06 />;
 }
 
 export default App;
