@@ -1,7 +1,7 @@
-import Module06 from "./modules/06-UseEffect-Component-Lifecycle/Module06";   
+import Module07 from "./modules/07-Component-Composition-Reusability/Module07";   
 
 function App() {
-  return <Module06 />;
+  return <Module07 />;
 }
 
 export default App;
