@@ -1,7 +1,7 @@
-import Module07 from "./modules/07-Component-Composition-Reusability/Module07";   
+import Module08 from "./modules/08-Routing/Module08";   
 
 function App() {
-  return <Module07 />;
+  return <Module08 />;
 }
 
 export default App;
