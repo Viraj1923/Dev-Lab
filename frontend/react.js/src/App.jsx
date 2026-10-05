@@ -1,7 +1,7 @@
-import Module09 from "./modules/09-API-Integration/Module09";   
+import Module10 from "./modules/10-Authentication-Protected-Routes/Module10";   
 
 function App() {
-  return <Module09 />;
+  return <Module10 />;
 }
 
 export default App;
