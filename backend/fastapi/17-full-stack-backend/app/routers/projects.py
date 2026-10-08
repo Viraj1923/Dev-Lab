@@ -42,12 +42,7 @@ def get_all_projects(
         Project.owner_id == current_user_id
     ).all()
 
-    if not projects:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Projects Not Found"
-        )
-
+    # An authenticated user with no projects has an empty collection, not an error.
     return projects
 
 

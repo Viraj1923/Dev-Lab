@@ -30,7 +30,7 @@ def get_current_user_id(
 
         return int(user_id)
 
-    except JWTError:
+    except (JWTError, ValueError):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid token"
