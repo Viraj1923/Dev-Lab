@@ -1,7 +1,8 @@
-import Module11 from "./modules/11-State-Management-Frontend-Architecture/Module11";   
+import { RouterProvider } from "react-router-dom";
+import router from "./app/router";
 
 function App() {
-  return <Module11 />;
+  return <RouterProvider router={router} />;
 }
 
 export default App;
