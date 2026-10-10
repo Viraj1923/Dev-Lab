@@ -1,217 +1,204 @@
-# Dev-Lab
+# React.js Learning Journey
 
-A hands-on development repository for learning and building full-stack applications. The repository includes backend learning modules and **DevBoard**, a full-stack project-management application built with React, FastAPI, and PostgreSQL.
+A hands-on React.js learning workspace inside **Dev-Lab**. This folder contains 11 practical React modules, progressing from JSX and component fundamentals to routing, API integration, authentication, and frontend architecture. It also contains **DevBoard**, the full-stack capstone application built using React and the FastAPI backend in this repository.
 
-## DevBoard
+The goal is to learn React by building and modifying working examples—not by collecting theory alone.
 
-DevBoard lets users register and sign in, manage their projects and tasks, and view an overview of their workspace.
+---
 
-### Features
+## Learning Roadmap
 
-- User registration and login with JWT authentication
-- Protected application routes and session restoration
-- Project CRUD (create, read, update, delete)
-- Task CRUD with `todo`, `in_progress`, and `completed` statuses
-- Dashboard statistics calculated from project/task API data
-- Ownership checks on protected project and task operations
-- PostgreSQL persistence
-- Docker Compose for the API and database
-- Responsive React UI with loading, error, and empty states
-- Interactive API documentation through Swagger UI
+| Module | Topic | Main focus |
+|---|---|---|
+| 01 | Fundamentals & JSX | JSX syntax, JavaScript expressions, rendering objects and arrays, conditional output, rendering lists |
+| 02 | Components & Props | Reusable components, passing data through props, composing components |
+| 03 | State & Events | `useState`, event handlers, adding and removing tasks, updating state immutably |
+| 04 | Conditional Rendering & Lists | Conditional UI, list rendering, search, filtering, stable keys |
+| 05 | Forms & Controlled Components | Controlled inputs, form state, handling checkboxes, validation and feedback |
+| 06 | `useEffect` & Component Lifecycle | Effects, fetching data, loading and error states, cleanup, dependency arrays |
+| 07 | Component Composition & Reusability | `children`, reusable cards, small components, composing UI from parts |
+| 08 | Routing | React Router, routes and links, URL parameters, navigation, nested routes and not-found UI |
+| 09 | API Integration | Fetching data, loading/error states, search, form submission, create/update workflows |
+| 10 | Authentication & Protected Routes | Authentication context, login/logout, protected pages and redirects |
+| 11 | State Management & Frontend Architecture | `useReducer`, reducer actions, splitting UI into components, keeping state updates organized |
 
-### Tech stack
+Each module has its own folder under `src/modules/`. The module-specific README files will document the implementation and learning outcomes as the documentation work progresses.
 
-| Layer | Technologies |
-|---|---|
-| Frontend | React, Vite, React Router, Tailwind CSS |
-| Backend | Python, FastAPI, Pydantic, SQLAlchemy |
-| Database | PostgreSQL 16 |
-| Authentication | JWT bearer tokens, password hashing |
-| Local infrastructure | Docker, Docker Compose |
-| Backend tests | pytest |
+## Tech Stack
 
-## Repository structure
+- **React** — component-based user interfaces
+- **JavaScript (ES modules)** — application logic
+- **Vite** — development server and production build
+- **React Router** — client-side routing
+- **Tailwind CSS v4** — styling for the DevBoard application
+- **Fetch API** — HTTP requests to APIs
+- **FastAPI + PostgreSQL** — backend and persistence used by the DevBoard capstone
+- **Docker Compose** — local backend/database environment
+
+Versions and scripts are defined in `package.json` and `package-lock.json`.
+
+---
+
+## Folder Structure
 
 ```text
-Dev-Lab/
-├── backend/
-│   └── fastapi/
-│       ├── 01-basics/
-│       ├── 02-project-structure/
-│       ├── ...
-│       └── 17-full-stack-backend/
-│           ├── app/
-│           │   ├── core/
-│           │   ├── database/
-│           │   ├── dependencies/
-│           │   ├── routers/
-│           │   ├── schemas/
-│           │   └── main.py
-│           ├── tests/
-│           ├── Dockerfile
-│           ├── docker-compose.yml
-│           └── README.md
-├── frontend/
-│   └── react.js/
-│       ├── src/
-│       │   ├── api/
-│       │   ├── app/
-│       │   ├── components/
-│       │   ├── context/
-│       │   └── pages/
-│       ├── package.json
-│       └── README.md
+react.js/
+├── public/                         # Static public assets
+├── src/
+│   ├── api/                        # API request modules used by DevBoard
+│   │   ├── auth.js
+│   │   ├── projects.js
+│   │   └── tasks.js
+│   ├── app/
+│   │   └── router.jsx              # Application route configuration
+│   ├── components/
+│   │   ├── auth/                   # Protected-route components
+│   │   └── layout/                 # Shared application layout
+│   ├── context/
+│   │   └── AuthContext.jsx         # DevBoard authentication state
+│   ├── modules/
+│   │   ├── 01-Fundamentals-JSX/
+│   │   ├── 02-Components-Props/
+│   │   ├── 03-State-Events/
+│   │   ├── 04-Conditional-Rendering-Lists/
+│   │   ├── 05-Forms-Controlled-Components/
+│   │   ├── 06-UseEffect-Component-Lifecycle/
+│   │   ├── 07-Component-Composition-Reusability/
+│   │   ├── 08-Routing/
+│   │   ├── 09-API-Integration/
+│   │   ├── 10-Authentication-Protected-Routes/
+│   │   └── 11-State-Management-Frontend-Architecture/
+│   ├── pages/                      # DevBoard pages
+│   ├── App.jsx                     # Application entry component
+│   ├── index.css                   # Global styles and Tailwind import
+│   └── main.jsx                    # React entry point
+├── index.html
+├── package.json
+├── package-lock.json
 └── README.md
 ```
 
-## Run DevBoard locally
+> The learning modules are practice examples. DevBoard's production-style pages and shared API/authentication code live separately in `src/pages/`, `src/api/`, `src/context/`, and the application routing/layout folders.
+
+---
+
+## Getting Started
 
 ### Prerequisites
 
-Install and start:
+Install the following:
 
+- Node.js and npm
 - Git
-- Docker Desktop
-- Node.js with npm
+- Docker Desktop, if you want to run the DevBoard backend locally
 
-The backend uses Docker Compose to run the API and PostgreSQL. The frontend runs with the Vite development server.
+### 1. Install frontend dependencies
 
-### 1. Configure the backend environment
-
-Open a Windows CMD terminal in the repository root:
-
-```bat
-cd /d D:\SDE\Development\Dev-Lab\backend\fastapi\17-full-stack-backend
-```
-
-Create a local `.env` file in this directory. Do not commit this file. Set the variables expected by the backend and Docker Compose:
-
-```env
-POSTGRES_USER=devboard_user
-POSTGRES_PASSWORD=replace_with_a_strong_local_password
-POSTGRES_DB=devboard
-app_name=DevBoard API
-secret_key=replace_with_a_long_random_secret
-ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=30
-```
-
-Use values appropriate for your local environment. The Compose configuration supplies the container database URL to the API; the PostgreSQL service is exposed on host port `5433`.
-
-### 2. Start the backend and database
-
-Make sure Docker Desktop is running, then execute:
-
-```bat
-docker compose up -d --build
-```
-
-Useful commands:
-
-```bat
-docker compose ps
-docker compose logs -f api
-docker compose down
-```
-
-The API is available at `http://localhost:8000`.
-
-Interactive API documentation:
-
-- Swagger UI: `http://localhost:8000/docs`
-- ReDoc: `http://localhost:8000/redoc`
-
-PostgreSQL is exposed to the host at `localhost:5433`; the API connects to the database service inside Docker Compose.
-
-### 3. Start the frontend
-
-Open a **second** CMD terminal from the repository root:
+Open Windows CMD and navigate to this folder:
 
 ```bat
 cd /d D:\SDE\Development\Dev-Lab\frontend\react.js
 npm install
 ```
 
-Create a local `.env` file in `frontend/react.js/` only if you need to override the API URL:
+### 2. Configure the API URL
+
+The frontend defaults to `http://localhost:8000`. For the standard local setup, no frontend environment file is required.
+
+To override the API URL, create a local `.env` file in this directory:
 
 ```env
 VITE_API_URL=http://localhost:8000
 ```
 
-The frontend defaults to `http://localhost:8000`, so this variable is optional for the standard local setup.
+Only place public frontend configuration in `VITE_*` variables. Never put passwords, JWT signing secrets, or other server secrets in frontend environment variables.
 
-Start Vite:
+### 3. Start the backend for DevBoard
+
+In a separate CMD terminal:
+
+```bat
+cd /d D:\SDE\Development\Dev-Lab\backend\fastapi\17-full-stack-backend
+docker compose up -d --build
+```
+
+The API is expected at `http://localhost:8000`. Swagger UI is available at `http://localhost:8000/docs` when the backend is running. Follow the backend module's README for its environment setup and troubleshooting.
+
+### 4. Start the frontend
+
+From `frontend/react.js/`:
 
 ```bat
 npm run dev
 ```
 
-Open the local URL printed by Vite, usually `http://localhost:5173`.
+Open the local address printed by Vite, usually `http://localhost:5173`.
 
-### 4. Build and lint the frontend
-
-From `frontend/react.js/`:
+### 5. Build and lint
 
 ```bat
 npm run build
 npm run lint
 ```
 
-### 5. Run backend tests
+- `npm run dev` starts the Vite development server.
+- `npm run build` creates the production build in `dist/`.
+- `npm run preview` serves the production build locally for review.
+- `npm run lint` runs Oxlint.
 
-From `backend/fastapi/17-full-stack-backend/`, with the required Python dependencies available in your environment:
+---
 
-```bat
-pytest tests -v
-```
+## DevBoard Capstone
 
-## API overview
+DevBoard is the integrated application used to apply the React concepts in a larger frontend.
 
-All project and task operations require a bearer token. Register or log in to obtain a token.
+### Features
 
-| Area | Method | Endpoint | Purpose |
-|---|---|---|---|
-| Auth | `POST` | `/auth/register` | Register a user |
-| Auth | `POST` | `/auth/login` | Log in and obtain a JWT |
-| Auth | `GET` | `/auth/me` | Get the current user |
-| Projects | `POST` | `/projects/` | Create a project |
-| Projects | `GET` | `/projects/all_projects` | List the current user's projects |
-| Projects | `GET` | `/projects/{project_id}` | Get a project |
-| Projects | `PUT` | `/projects/{project_id}` | Update a project |
-| Projects | `DELETE` | `/projects/{project_id}` | Delete a project |
-| Tasks | `POST` | `/tasks/` | Create a task |
-| Tasks | `GET` | `/tasks/{task_id}` | Get a task |
-| Tasks | `GET` | `/tasks/project/{project_id}` | List tasks for a project |
-| Tasks | `PUT` | `/tasks/{task_id}` | Update a task |
-| Tasks | `DELETE` | `/tasks/{task_id}` | Delete a task |
+- User registration and login
+- JWT-based authentication with protected routes
+- Session restoration and logout
+- Project creation, listing, editing, and deletion
+- Task creation, listing, status updates, and deletion
+- Dashboard statistics derived from project and task API data
+- Loading, error, success, and empty states
+- Responsive application layout
 
-Task statuses are `todo`, `in_progress`, and `completed`. See `/docs` for the exact request and response schemas.
+### Architecture at a glance
 
-## Authentication and data access
+- **Pages** render the dashboard, project, task, login, and registration screens.
+- **API modules** centralize requests to the authentication, projects, and tasks endpoints.
+- **Auth context** exposes the current user, loading state, authentication status, login, and logout.
+- **Protected routes** prevent unauthenticated users from accessing application pages.
+- **FastAPI** handles authentication and project/task operations; **PostgreSQL** stores application data.
 
-The frontend stores the access token in browser local storage and sends it as a bearer token for protected API requests. The backend authenticates requests and checks ownership for project/task operations. Logging out removes the locally stored token.
+The task API lists tasks by project rather than exposing a global list-all-tasks endpoint. The dashboard therefore retrieves projects and aggregates their tasks.
 
-This is a learning/MVP implementation. Before public production deployment, review token storage and expiration behavior, HTTPS, CORS origins, secret management, database backups/migrations, rate limiting, and deployment-specific configuration.
+### Known MVP limitations
 
-## Configuration and security
+- Password reset is not implemented.
+- The “Project workspace” link may not yet be connected to a working destination.
+- Task statuses are `todo`, `in_progress`, and `completed`; the backend task schema does not include a priority field.
 
-- Never commit `.env` files, real passwords, JWT secrets, or production credentials.
-- The repository `.gitignore` excludes `.env` files, `node_modules`, build output, and common Python artifacts.
-- For deployment, configure `VITE_API_URL` to point to the deployed API and configure backend CORS to allow the deployed frontend origin.
-- Do not put server secrets in `VITE_*` variables; Vite exposes those values to client-side code.
-- The local CORS setup may be configured for `http://localhost:5173`; update it intentionally for any additional frontend origin.
+These are known scope limitations, not advertised as completed functionality.
 
-## Scope and known limitations
+---
 
-- Password reset is not implemented in the current MVP.
-- The “Project workspace” UI link may not have a destination wired up yet.
-- Tasks are listed by project; the API does not provide a global list-all-tasks endpoint, so the dashboard aggregates tasks from the user's projects.
-- The root README documents the current repository layout; backend-specific implementation details are documented in `backend/fastapi/17-full-stack-backend/README.md`.
+## Suggested Study Workflow
 
-## Project status
+For each module:
 
-DevBoard's primary frontend/backend flows have been manually tested locally, including authentication, project and task operations, dashboard statistics, session restoration, mobile layout, and behavior when the backend is unavailable. The frontend production build has also been reported as passing.
+1. Read the module-specific README when available.
+2. Inspect the component and trace where its data comes from.
+3. Run the example and interact with it.
+4. Change the implementation yourself and observe the result.
+5. Review edge cases and commit the completed work.
+
+The emphasis is on understanding the behavior of each concept and being able to implement it independently.
+
+## Repository Context
+
+This directory is part of the larger **Dev-Lab** repository. The repository root README describes the overall learning repository, while the backend's own README documents the FastAPI learning journey and backend capstone. This README focuses specifically on the React.js learning workspace and its DevBoard frontend.
 
 ## License
 
-No license is specified in this repository yet. Add a license file if you intend to publish or distribute the project under specific terms.
+No license is specified here. Refer to the repository root for project-wide licensing information, if added.
