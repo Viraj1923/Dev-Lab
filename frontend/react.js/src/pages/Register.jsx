@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { registerUser } from "../api/auth";
 
 function Register() {
     const [form, setForm] = useState({
@@ -12,8 +13,10 @@ function Register() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [error, setError] = useState("");
+    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
         setError("");
 
@@ -37,8 +40,24 @@ function Register() {
             return;
         }
 
-        // Registration API integration comes next.
-        setError("Registration isn't connected yet. We'll enable it next.");
+        try {
+            setIsLoading(true);
+
+            await registerUser({
+                name: form.name.trim(),
+                email: form.email.trim(),
+                password: form.password,
+            });
+
+            navigate("/login", {
+                replace: true,
+                state: { registered: true },
+            });
+        } catch (error) {
+            setError(error.message || "Registration failed. Please try again.");
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     return (
@@ -247,6 +266,7 @@ function Register() {
                                 >
                                     {showConfirmPassword ? "Hide" : "Show"}
                                 </button>
+
                             </div>
                         </div>
 
@@ -261,10 +281,11 @@ function Register() {
 
                         <button
                             type="submit"
-                            className="flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200"
+                            disabled={isLoading}
+                            className="flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200 disabled:cursor-not-allowed disabled:opacity-60"
                         >
-                            Create account
-                            <span aria-hidden="true">→</span>
+                            {isLoading ? "Creating account..." : "Create account"}
+                            {!isLoading && <span aria-hidden="true">→</span>}
                         </button>
                     </form>
 

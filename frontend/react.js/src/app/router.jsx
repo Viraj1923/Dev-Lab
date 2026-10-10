@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import AppLayout from "../components/layout/AppLayout";
+import ProtectedRoute from "../components/auth/ProtectedRoute";
+
 import Dashboard from "../pages/Dashboard";
 import Projects from "../pages/Projects";
 import Tasks from "../pages/Tasks";
@@ -17,12 +19,26 @@ const router = createBrowserRouter([
     element: <Register />,
   },
   {
-    path: "/",
-    element: <AppLayout />,
+    element: <ProtectedRoute />,
     children: [
-      { index: true, element: <Dashboard /> },
-      { path: "projects", element: <Projects /> },
-      { path: "tasks", element: <Tasks /> },
+      {
+        path: "/",
+        element: <AppLayout />,
+        children: [
+          {
+            index: true,
+            element: <Dashboard />,
+          },
+          {
+            path: "projects",
+            element: <Projects />,
+          },
+          {
+            path: "tasks",
+            element: <Tasks />,
+          },
+        ],
+      },
     ],
   },
 ]);
