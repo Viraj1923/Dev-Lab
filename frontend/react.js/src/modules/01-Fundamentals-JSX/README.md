@@ -235,39 +235,6 @@ The app's routing determines which page is displayed. If Module 01 is not the cu
 
 ---
 
-# 🧪 9. Practice Exercises
-
-Try these changes in `Module01.jsx` before looking up a solution.
-
-### Exercise 1 — Update the greeting
-
-- Change the `name` variable.
-- Change the `course` variable.
-- Observe how the greeting changes.
-
-### Exercise 2 — Add an object property
-
-- Add a `city` property to `user`.
-- Render the city in a new paragraph using `user.city`.
-
-### Exercise 3 — Add a skill
-
-- Add another string to `skills`.
-- Confirm that `.map()` renders another list item without manually writing a new `<li>`.
-
-### Exercise 4 — Test the ternary
-
-- Change `user.isStudent` to `false`.
-- Observe the student status text.
-- Restore it to `true` and compare the result.
-
-### Exercise 5 — Test `&&`
-
-- Change `user.isStudent` to `false`.
-- Confirm that “Currently studying React.” is no longer displayed.
-
----
-
 # 🧠 Key Takeaways
 
 By the end of this module, you should be able to explain:
@@ -289,9 +256,8 @@ These fundamentals are used throughout the later modules for props, state, forms
 - [x] Component and JSX example documented
 - [x] Variables, object properties, and array rendering documented
 - [x] Ternary and `&&` conditional rendering documented
-- [ ] Practice exercises completed independently
 
-> Documentation describes the current `Module01.jsx` example. Mark the practice exercises complete after implementing and testing the changes yourself.
+> This README documents the concepts demonstrated by the current `Module01.jsx` example.
 
 ---
 
