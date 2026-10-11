@@ -257,23 +257,23 @@ Foreign-key relationships connect users → projects and projects → tasks.
 
 Configuration is handled through **Pydantic Settings** and environment variables.
 
-Create a local `.env` file:
+Create a local `.env` file. The values below are placeholders; replace them with your own credentials and a randomly generated secret.
 
 ```env
-app_name=DevBoard API
-database_url=postgresql://<username>:<password>@<host>:<port>/<database>
-secret_key=<your-secret-key>
+APP_NAME=DevBoard API
+DATABASE_URL=postgresql://<username>:<password>@<host>:<port>/<database>
+SECRET_KEY=<long-random-secret>
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
+DATABASE_ECHO=false
+CORS_ORIGINS=["http://localhost:5173"]
 
-For Docker Compose, the PostgreSQL service expects:
-
-```env
 POSTGRES_USER=<your-postgres-username>
 POSTGRES_PASSWORD=<your-postgres-password>
 POSTGRES_DB=<your-database-name>
-
 ```
+
+`CORS_ORIGINS` is a JSON-style list of allowed browser origins. For deployment, set it to include your actual frontend origin, for example `CORS_ORIGINS=["https://your-frontend.example"]`. Do not include a trailing slash in an origin. Configure the same environment variables in your hosting provider's secret/environment settings.
 
 ⚠️ **Never commit real secrets or production database credentials to GitHub.**
 

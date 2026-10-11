@@ -4,17 +4,18 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routers.auth import router as auth_router
 from app.routers.projects import router as project_router
 from app.routers.tasks import router as task_router
+from app.core.config import settings
 
 from app.core.exceptions import (
     EmailAlreadyRegisteredError,
     InvalidCredentialsError,
 )
 
-app = FastAPI()
+app = FastAPI(title=settings.app_name)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=settings.cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
