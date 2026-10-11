@@ -72,7 +72,7 @@ def login_user(
 
 
 
-@router.get("/me")
+@router.get("/me", response_model=UserResponse)
 def get_current_user(
     user_id: int = Depends(get_current_user_id),
     db: Session = Depends(get_db)

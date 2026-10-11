@@ -257,12 +257,12 @@ Foreign-key relationships connect users → projects and projects → tasks.
 
 Configuration is handled through **Pydantic Settings** and environment variables.
 
-Create a local `.env` file. The values below are placeholders; replace them with your own credentials and a randomly generated secret.
+Create a local `.env` file in the project root:
 
 ```env
 APP_NAME=DevBoard API
 DATABASE_URL=postgresql://<username>:<password>@<host>:<port>/<database>
-SECRET_KEY=<long-random-secret>
+SECRET_KEY=<at-least-32-character-random-secret>
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
 DATABASE_ECHO=false
@@ -273,11 +273,9 @@ POSTGRES_PASSWORD=<your-postgres-password>
 POSTGRES_DB=<your-database-name>
 ```
 
-`CORS_ORIGINS` is a JSON-style list of allowed browser origins. For deployment, set it to include your actual frontend origin, for example `CORS_ORIGINS=["https://your-frontend.example"]`. Do not include a trailing slash in an origin. Configure the same environment variables in your hosting provider's secret/environment settings.
+`SECRET_KEY` must be at least 32 characters. Use a cryptographically random value, not the example text. `CORS_ORIGINS` is a JSON array; for deployment, replace the local origin with the exact frontend origin(s), including the scheme and port where applicable. Do not use `*` when credentials are enabled.
 
-⚠️ **Never commit real secrets or production database credentials to GitHub.**
-
-For production, use your hosting provider's environment-variable/secret management instead of storing secrets in source control.
+⚠️ **Never commit a real `.env` file, JWT secret, or production database credentials.** Use your hosting provider's environment-variable or secret-management system in production.
 
 ---
 
