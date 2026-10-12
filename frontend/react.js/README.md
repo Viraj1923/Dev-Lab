@@ -40,6 +40,37 @@ The learning modules live under `src/modules/`. DevBoard's application pages, sh
 
 ---
 
+## 🌍 Live Deployment
+
+**DevBoard is deployed and connected end to end.**
+
+- **Live application:** https://devboard-frontend-kappa.vercel.app
+- **Backend API / Swagger documentation:** https://devboard-api-0wsh.onrender.com/docs
+
+### Production architecture
+
+| Layer | Technology | Hosting |
+|---|---|---|
+| Frontend | React, Vite | Vercel |
+| Backend API | FastAPI | Render |
+| Database | PostgreSQL | Neon |
+| Local development | Docker Compose | Local machine |
+
+The deployed frontend uses the `VITE_API_URL` environment variable to reach the Render API. In Vercel, its value is:
+
+```env
+VITE_API_URL=https://devboard-api-0wsh.onrender.com
+```
+
+This variable is public client-side configuration, not a secret. Database credentials and JWT signing keys belong only in the backend environment.
+
+**Deployment notes**
+- Render's free web service may take a little time to respond after being idle while it starts up.
+- The frontend's Vercel rewrite configuration supports refreshing client-side routes such as `/login`.
+- Local development still defaults to `http://localhost:8000`; configure backend CORS to allow the frontend origin you are using.
+
+---
+
 # 🗂️ Module Structure
 
 | # | Module | Focus |
@@ -595,7 +626,7 @@ DevBoard Full-Stack Frontend 🚀
 
 **React.js learning path: Modules 01 → 11 documented in this overview ✅**
 
-**Capstone: DevBoard frontend integrated with the FastAPI backend 🚀**
+**Capstone: DevBoard frontend integrated with the FastAPI backend and deployed on Vercel, Render, and Neon 🚀**
 
 This directory contains both the individual React practice modules and the DevBoard application that applies those concepts in a larger frontend. The module list describes the learning path; it does not imply that every possible React topic or production feature is covered.
 
